@@ -1,0 +1,23 @@
+---
+title: "Setup"
+output:
+  workflowr::wflow_html:
+    toc: false
+editor_options:
+  chunk_output_type: console
+---
+
+# Pre-workshop setup
+
+To follow along, please ensure the following data are downloaded prior to the workshop beginning:
+
+TODO: download everything required in a script
+
+# Obtaining data
+
+We will be using the following anndata-compatible data file:  
+[DY1_D0_stereo-seq.h5ad](https://filesender.aarnet.edu.au/download.php?token=1beae7a9-436e-4915-9e01-4f24360140aa&files_ids=23496582)
+
+The above link is only temporarily available, but a longer term link is available [here]( https://ftp.cngb.org/pub/SciRAID/stomics/STDS0000059/Stereo-seq/DY1_D0_stereo-seq.h5ad).
+
+This data is from [LISTA: LIver Spatio-Temporal Atlas](https://db.cngb.org/stomics/lista/).
