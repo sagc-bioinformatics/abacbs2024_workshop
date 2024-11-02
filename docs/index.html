@@ -292,7 +292,7 @@ $(document).ready(function () {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -303,8 +303,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -317,9 +317,9 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>abacbs_workshop/</code> <span
@@ -342,33 +342,36 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate"
+<div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git
-repository, you know the exact version of the code that produced these
-results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsagcbioinformaticsabacbs2024workshoptreee549b5aa95e1f4f6c15ae30cf548d02b8d5a6c45targetblanke549b5aa">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsagcbioinformaticsabacbs2024workshoptreee13a3322e5376440c6ec9cf309c2c13f63e0565ftargetblanke13a332a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/sagc-bioinformatics/abacbs2024_workshop/tree/e549b5aa95e1f4f6c15ae30cf548d02b8d5a6c45" target="_blank">e549b5a</a>
+<a href="https://github.com/sagc-bioinformatics/abacbs2024_workshop/tree/e13a3322e5376440c6ec9cf309c2c13f63e0565f" target="_blank">e13a332</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomsagcbioinformaticsabacbs2024workshoptreee549b5aa95e1f4f6c15ae30cf548d02b8d5a6c45targetblanke549b5aa"
+id="strongRepositoryversionstrongahrefhttpsgithubcomsagcbioinformaticsabacbs2024workshoptreee13a3322e5376440c6ec9cf309c2c13f63e0565ftargetblanke13a332a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -378,7 +381,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/sagc-bioinformatics/abacbs2024_workshop/tree/e549b5aa95e1f4f6c15ae30cf548d02b8d5a6c45" target="_blank">e549b5a</a>.
+<a href="https://github.com/sagc-bioinformatics/abacbs2024_workshop/tree/e13a3322e5376440c6ec9cf309c2c13f63e0565f" target="_blank">e13a332</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -394,6 +397,9 @@ were generated:
 <pre><code>
 Ignored files:
     Ignored:    .Rproj.user/
+
+Unstaged changes:
+    Modified:   analysis/index.Rmd
 
 </code></pre>
 <p>
@@ -437,6 +443,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/sagc-bioinformatics/abacbs2024_workshop/e13a3322e5376440c6ec9cf309c2c13f63e0565f/docs/index.html" target="_blank">e13a332</a>
+</td>
+<td>
+jrs
+</td>
+<td>
+2024-11-02
+</td>
+<td>
+rebuild
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -564,9 +587,11 @@ Start workflowr project.
 </div>
 </div>
 <p>When: <strong>Thursday, November 7th, 2024</strong></p>
-<p>Room 1070, as part of <a
-href="https://www.abacbs.org/conference2024/workshop">ABACBS
-2024</a></p>
+<p>Where: <strong>Room 1070, Abercrombie Building, University of
+Sydney</strong></p>
+<p>Please see the <a
+href="https://www.abacbs.org/conference2024/workshop">ABACBS 2024</a>
+workshop schedule for more information.</p>
 <table>
 <thead>
 <tr class="header">
