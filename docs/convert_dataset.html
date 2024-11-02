@@ -334,6 +334,9 @@ div.tocify {
   <a href="index.html">Home</a>
 </li>
 <li>
+  <a href="setup.html">Setup</a>
+</li>
+<li>
   <a href="about.html">About</a>
 </li>
 <li>
@@ -364,7 +367,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+workflowr <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -375,8 +378,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> </a>
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -389,9 +392,9 @@ aria-hidden="true"></span> </a>
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 1
+aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>abacbs_workshop/</code> <span
@@ -414,36 +417,33 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
-<span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
-changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges"
+<div id="strongRMarkdownfilestronguptodate"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown is untracked by Git. To know which version of the R
-Markdown file created these results, you’ll want to first commit it to
-the Git repo. If you’re still working on the analysis, you can ignore
-this warning. When you’re finished, you can run
-<code>wflow_publish</code> to commit the R Markdown file and build the
-HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsagcbioinformaticsabacbs2024workshoptree93f4259bd19c01e5aba087463d42d62124ad2dc9targetblank93f4259a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsagcbioinformaticsabacbs2024workshoptreee549b5aa95e1f4f6c15ae30cf548d02b8d5a6c45targetblanke549b5aa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/sagc-bioinformatics/abacbs2024_workshop/tree/93f4259bd19c01e5aba087463d42d62124ad2dc9" target="_blank">93f4259</a>
+<a href="https://github.com/sagc-bioinformatics/abacbs2024_workshop/tree/e549b5aa95e1f4f6c15ae30cf548d02b8d5a6c45" target="_blank">e549b5a</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomsagcbioinformaticsabacbs2024workshoptree93f4259bd19c01e5aba087463d42d62124ad2dc9targetblank93f4259a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomsagcbioinformaticsabacbs2024workshoptreee549b5aa95e1f4f6c15ae30cf548d02b8d5a6c45targetblanke549b5aa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -453,7 +453,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/sagc-bioinformatics/abacbs2024_workshop/tree/93f4259bd19c01e5aba087463d42d62124ad2dc9" target="_blank">93f4259</a>.
+<a href="https://github.com/sagc-bioinformatics/abacbs2024_workshop/tree/e549b5aa95e1f4f6c15ae30cf548d02b8d5a6c45" target="_blank">e549b5a</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -470,10 +470,6 @@ were generated:
 Ignored files:
     Ignored:    .Rproj.user/
 
-Untracked files:
-    Untracked:  analysis/convert_dataset.Rmd
-    Untracked:  analysis/setup.Rmd
-
 </code></pre>
 <p>
 Note that any generated files, e.g. HTML, png, CSS, etc., are not
@@ -488,9 +484,72 @@ have uncommitted changes.
 </div>
 <div id="versions" class="tab-pane fade">
 <p>
-There are no past versions. Publish this analysis with
-<code>wflow_publish()</code> to start tracking its development.
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/convert_dataset.Rmd</code>) and
+HTML (<code>docs/convert_dataset.html</code>) files. If you’ve
+configured a remote Git repository (see <code>?wflow_git_remote</code>),
+click on the hyperlinks in the table below to view the files as they
+were in that past version.
 </p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/sagc-bioinformatics/abacbs2024_workshop/blob/a355f6de9319edf32a1ac3c3f61ad9673bf06efc/analysis/convert_dataset.Rmd" target="_blank">a355f6d</a>
+</td>
+<td>
+jrs
+</td>
+<td>
+2024-11-02
+</td>
+<td>
+information on setup
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/sagc-bioinformatics/abacbs2024_workshop/a355f6de9319edf32a1ac3c3f61ad9673bf06efc/docs/convert_dataset.html" target="_blank">a355f6d</a>
+</td>
+<td>
+jrs
+</td>
+<td>
+2024-11-02
+</td>
+<td>
+information on setup
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr>
 </div>
 </div>
