@@ -8,7 +8,13 @@ editor_options:
   chunk_output_type: console
 ---
 
-Welcome to my research website.
+When: **Thursday, November 7th, 2024**
 
-Hello world!
+Room 1070, as part of [ABACBS 2024](https://www.abacbs.org/conference2024/workshop)
 
+| Time  | Topic                                 |
+|:------|:--------------------------------------|
+| 9:00  | [Part 1 (Intro and SAW)](SAW.html)    |
+| 10:00 | Morning tea                           |
+| 10:30 | [Part 2 (Downstream)](SAW.html)       |
+| 11:30 | End of workshop                       |

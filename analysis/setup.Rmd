@@ -21,3 +21,8 @@ We will be using the following anndata-compatible data file:
 The above link is only temporarily available, but a longer term link is available [here]( https://ftp.cngb.org/pub/SciRAID/stomics/STDS0000059/Stereo-seq/DY1_D0_stereo-seq.h5ad).
 
 This data is from [LISTA: LIver Spatio-Temporal Atlas](https://db.cngb.org/stomics/lista/).
+
+
+# Envrionment setup
+
+A Docker image is available that will allow you to download
