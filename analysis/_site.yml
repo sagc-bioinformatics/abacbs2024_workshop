@@ -9,7 +9,7 @@ navbar:
   - text: Setup
     href: setup.html
   - text: Download
-    href: 00_download.html
+    href: download.html
   - text: About
     href: about.html
   - text: License

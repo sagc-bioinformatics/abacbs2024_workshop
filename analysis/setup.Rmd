@@ -60,7 +60,7 @@ substituting the the IP address with the one provided on the day.
 
 ## Run manually (not recommended)
 
-If you want to set up an environment from scratch, please refer to the Dockerfile
+If you want to set up an environment from scratch, please refer to the [Dockerfile](assets/Dockerfile)
 for required dependencies.
 
 Please note that due to the short amount of time allocated we will not be able to 
@@ -90,5 +90,5 @@ git clone https://github.com/sagc-bioinformatics/abacbs2024_workshop.git
 # Obtaining the data
 
 Once you have cloned the repository, navigate to RStudio, and run the download workbook
-[(00_download.Rmd)](00_download.html) to download the data files.
+[(download.Rmd)](download.html) to download the data files.
 
