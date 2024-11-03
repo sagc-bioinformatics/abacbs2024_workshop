@@ -11,7 +11,7 @@
 
 
 
-<title>SAW.knit.md</title>
+<title>Data download</title>
 
 <script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -369,52 +369,63 @@ div.tocify {
 
 
 
+<h1 class="title toc-ignore">Data download</h1>
 
 </div>
 
 
-<div id="plan" class="section level1">
-<h1>Plan</h1>
-<ul>
-<li>Background on Stereo-seq, available options (OMNI vs latest
-chemistry)</li>
-<li>Information on available processing methods</li>
-<li>Description of what you get back (compare SAW versions)</li>
-<li>Take us through the example dataset</li>
-<li>Do some other garbage</li>
-</ul>
-<p><a
-href="https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/tutorials/run-main-pipeline/stereo-seq-ff"
-class="uri">https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/tutorials/run-main-pipeline/stereo-seq-ff</a></p>
+<div id="mouse-brain-demo-stereo-seq-v1.3-data" class="section level2">
+<h2>Mouse brain (demo Stereo-seq v1.3 data)</h2>
+<p>We will be exploring a demo mouse brain dataset made public by
+STOmics:</p>
+<p><img src="assets/mmbrain.png"
+title="Stereo-seq mouse brain FF v1.3" /></p>
+<p>Although not required for this workshop, the raw data and additional
+demo datasets are available to download <a
+href="https://en.stomics.tech/resources/demo-data/list.html">here</a>.</p>
+<p>SAW (Stereo-seq Analysis Workflow) v8.1 was run to generate several
+output files that we will explore. The processed data will not be
+available indefinitely, however later you will see how to regenerate it
+for yourself. TODO: link to notebook.</p>
+<p>You can download the <a
+href="https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&amp;files_ids=23488227">SAW
+report here</a>.</p>
+<pre class="r"><code># Download report
+
+download_missing(url=&quot;https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&amp;files_ids=23488227&quot;, destfile=&quot;data/C04042E3.report.tar.gz&quot;)</code></pre>
+<p>A primary output of SAW v8.1 is <a
+href="https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&amp;files_ids=23488224">visualization.tar.gz</a>.
+We will be extracting this file and examining the contents.</p>
+<blockquote>
+<p><strong>Warning:</strong> Relatively large file (4.9GB)!</p>
+</blockquote>
+<pre class="r"><code># Download visualization.tar.gz
+
+download_missing(url=&quot;https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&amp;files_ids=23488224&quot;, destfile=&quot;data/visualization.tar.gz&quot;)</code></pre>
 </div>
-<div id="h5ad-examination" class="section level1">
-<h1>h5ad examination</h1>
-</div>
-<div id="cell-type-decomposition-with-rctd" class="section level1">
-<h1>Cell type decomposition with RCTD</h1>
-<p>A feature of this particular dataset is matched single cell data.
-Having this information is fantastic as it gives a reference to perform
-cell type decomposition.</p>
-<p>Note: it is possible to do cell-type deconvolution without a
-reference, with methods such as SCDeconvolve</p>
-<p>Robust decomposition of cell type mixtures in spatial
-transcriptomics</p>
-<ul>
-<li><p>todo, how to run this?</p></li>
-<li><p>also todo, maybe some of the cleaning methods…</p></li>
-</ul>
-<p><a href="https://www.nature.com/articles/s41587-021-00830-w"
-class="uri">https://www.nature.com/articles/s41587-021-00830-w</a></p>
-<p>The paper also has the code uploaded: <a
-href="https://github.com/haoshijie13/LISTA"
-class="uri">https://github.com/haoshijie13/LISTA</a></p>
-<p><a
-href="https://github.com/haoshijie13/LISTA/blob/main/00.run_RCTD.R"
-class="uri">https://github.com/haoshijie13/LISTA/blob/main/00.run_RCTD.R</a></p>
-<p>single cell data: <a
-href="https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM5764269&amp;format=file&amp;file=GSM5764269%5Ffiltered%5Ffeature%5Fbc%5Fmatrix%5FCS89%2Eh5"
-class="uri">https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM5764269&amp;format=file&amp;file=GSM5764269%5Ffiltered%5Ffeature%5Fbc%5Fmatrix%5FCS89%2Eh5</a></p>
-<p>TODO: ask cathal how he’s going with this</p>
+<div id="mouse-liver-published-stereo-seq-v1.2-data"
+class="section level2">
+<h2>Mouse liver (published Stereo-seq v1.2 data)</h2>
+<p>For our later downstream analysis, we will be using the following
+anndata-compatible data file:<br />
+<a
+href="https://filesender.aarnet.edu.au/download.php?token=1beae7a9-436e-4915-9e01-4f24360140aa&amp;files_ids=23496582">DY1_D0_stereo-seq.h5ad</a></p>
+<blockquote>
+<p><strong>Warning:</strong> Relatively large file (4.4GB)!</p>
+</blockquote>
+<pre class="r"><code># Download LISTA data
+
+download_missing(url=&quot;https://filesender.aarnet.edu.au/download.php?token=1beae7a9-436e-4915-9e01-4f24360140aa&amp;files_ids=23496582&quot;, destfile=&quot;data/DY1_D0_stereo-seq.h5ad&quot;)</code></pre>
+<p>The above link is only temporarily available for this workshop, but
+the data will be available later on from <a
+href="https://ftp.cngb.org/pub/SciRAID/stomics/STDS0000059/Stereo-seq/DY1_D0_stereo-seq.h5ad">CNGBdb</a>.</p>
+<p>This file is from <a href="https://db.cngb.org/stomics/lista/">LISTA:
+LIver Spatio-Temporal Atlas</a>, in which Stereo-seq to profile mouse
+liver homeostasis and regeneration following partial hepatectomy over
+several time points. Our file is from day 0, the first time point
+following hepatectomy.</p>
+<p>TODO: Matched single cell data is also available to download from <a
+href="">here</a></p>
 </div>
 
 
