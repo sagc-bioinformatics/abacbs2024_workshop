@@ -1,98 +1,64 @@
 ---
 title: "Setup"
-output:
-  workflowr::wflow_html:
-    toc: true
 editor_options:
   chunk_output_type: console
 ---
 
-# Pre-workshop setup
-
 Please read the following setup information prior to the workshop beginning:
 
-# Data files
+# Environment setup
 
-TODO: make a script to just download everything relevant.
-
-
-## Mouse brain (demo Stereo-seq v1.3 data)
-
-We will be exploring a demo mouse brain dataset made public by STOmics:
-
-![](assets/mmbrain.png "Stereo-seq mouse brain FF v1.3")
-
-Although not required for this workshop, the raw data and additional demo 
-datasets are available to download [here](https://en.stomics.tech/resources/demo-data/list.html).
-
-You can download the processed [SAW report here](https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&files_ids=23488227).
-
-
-```{r}
-download.file(url = "https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&files_ids=23488227", 
-              destfile = "data/C04042E3.report.tar.gz")
-```
-
-Raw data were processed using SAW v8.1 to produce [visualization.tar.gz](https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&files_ids=23488224).
-
-As part of the workshop we will be exploring [visualization.tar.gz](https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&files_ids=23488224), but it is not essential
-to download in advance unless you wish to explore it for yourself.
-
-
-```{r}
-download.file(url = "https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&files_ids=23488227", 
-              destfile = "data/C04042E3.report.tar.gz")
-```
-
-
-## Mouse liver (published Stereo-seq v1.2 data)
-
-For our later downstream analysis, we will be using the following 
-anndata-compatible data file:  
-[DY1_D0_stereo-seq.h5ad](https://filesender.aarnet.edu.au/download.php?token=1beae7a9-436e-4915-9e01-4f24360140aa&files_ids=23496582)
-
-The above link is only temporarily available for this workshop, but the data will  
-be available later on from [here]( https://ftp.cngb.org/pub/SciRAID/stomics/STDS0000059/Stereo-seq/DY1_D0_stereo-seq.h5ad).
-
-These data are from [LISTA: LIver Spatio-Temporal Atlas](https://db.cngb.org/stomics/lista/).
-
-This experiment used Stereo-seq to profile mouse liver homeostasis and 
-regeneration following partial hepatectomy over several time points. Our file is
-from day 0, the first time point following hepatectomy. 
-
-Matched single cell data is also available to download from [here]()
-
-TODO: figure out which file to point to for single cell.
-
-# Envrionment setup
-
-
-A Docker image is available containing RStudio and JupyterLab with dependencies 
-already set up.
+A Docker image is available containing RStudio and JupyterLab with dependencies already set up (`quay.io/sagc/rstomics`).
 
 There are two main options to use this image:
 
-## Run the docker image locally (recommended if you have Docker set up)
+## Run docker locally
 
-The easiest way to get started is to use the provided Docker image.
+This is recommended if you already have Docker set up and would like to run
+everything on your own hardware.
 
-This image can be obtained like so: `docker pull quay.io/sagc/rstomics`
+1. Pull the image: `docker pull quay.io/sagc/rstomics`
+2. Run container, exposing ports for rstudio and jupyter, optionally bind mounting storage on your local machine, e.g.
 
-If your local device has docker installed, you can run a container locally.
+```{bash, eval=FALSE}
+#!/bin/bash
 
-A script might look like this:
+BIND_PATH=/my/local/storage
 
-Where BIND_DIR is a location that you would like to make available to the container.
+docker run \
+    --rm -ti \
+    -p 8787:8787 \
+    -p 8888:8888 \
+    -v ${BIND_PATH}:/root/data quay.io/sagc/rstomics
+```
 
+> If you use local bind paths, make sure that any data files you wish to retain
+> are created in the bind mount (in the above script, this will be visible in the container at /root/data)
 
-## Running remotely (recommended if you don't have Docker set up)
+### Accessing the environment
 
+Once the container is running:
 
-We have set up multiple instances running remotely that you will be able to access.
+- The RStudio server can be accessed on port 8787: [http://127.0.0.1:8787](http://127.0.0.1:8787)
+- The JupyterLab server can be accessed on port 8888: [http://127.0.0.1:8888](http://127.0.0.1:8888)
+
+Use passphrase `abacbs24` and username `root` if required.
+
+## Run docker in cloud (Nectar)
+
+If you'd like to run a cloud instance of the container, we will provide you with
+an IP address where the container is being hosted. Please ask an instructor for assistance.
 
 You'll just need an internet-connected device to be able to access your instance.
 
-## Setting up from scratch (not recommended)
+Log in as per the [Accessing the environment](#accessing-the-environment) section above, 
+substituting the the IP address with the one provided on the day.
+
+> Please *download* any modified files you wish to keep before the end of the day,
+> as the cloud instance will be destroyed after the day of the workshop!
+
+
+## Run manually (not recommended)
 
 If you want to set up an environment from scratch, please refer to the Dockerfile
 for required dependencies.
@@ -100,16 +66,29 @@ for required dependencies.
 Please note that due to the short amount of time allocated we will not be able to 
 help diagnose setup issues if you choose this method.
 
-Please note that StereoPy **requires** Python 3.8, it is not compatible with newer versions.
+> Please note that StereoPy **requires** Python 3.8, it is not compatible with newer Python versions.
 
-If you would like to set up your environment manually, please see below the
-required dependencies.
+# Obtaining the code
 
-## Moving on
+This website is implemented with `workflowr` and can be cloned into a location
+of your preference. Navigate to a suitable location, and clone `https://github.com/sagc-bioinformatics/abacbs2024_workshop.git`.
 
-Once you have your environment set up, you can move on to downloading the code
-and data.
+> If needed you can access a terminal from within RStudio or JupyterLab.
 
-This website is implemented with `workflowr`. Clone it using git:
+e.g:
 
-`git clone https://github.com/sagc-bioinformatics/abacbs2024_workshop.git`
+```
+#!/bin/bash
+
+# in the local docker setup above, this location is bind mounted to the host
+cd data/
+
+# obtain the code for this workshop
+git clone https://github.com/sagc-bioinformatics/abacbs2024_workshop.git
+```
+
+# Obtaining the data
+
+Once you have cloned the repository, navigate to RStudio, and run the download workbook
+[(00_download.Rmd)](00_download.html) to download the data files.
+

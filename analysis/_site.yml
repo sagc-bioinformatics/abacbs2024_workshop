@@ -1,12 +1,15 @@
 name: abacbs_workshop
+suppress_report: TRUE
 output_dir: ../docs
 navbar:
-  title: abacbs_workshop
+  title: Stereo-seq workshop
   left:
   - text: Home
     href: index.html
   - text: Setup
     href: setup.html
+  - text: Download
+    href: 00_download.html
   - text: About
     href: about.html
   - text: License
@@ -18,6 +21,10 @@ navbar:
 output:
   workflowr::wflow_html:
     toc: yes
-    toc_float: yes
-    theme: cosmo
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+      float: yes
+    theme: cerulean
     highlight: textmate
+

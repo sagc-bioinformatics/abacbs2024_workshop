@@ -1,3 +1,40 @@
 
+# Plan
+
+- Background on Stereo-seq, available options (OMNI vs latest chemistry)
+- Information on available processing methods
+- Description of what you get back (compare SAW versions)
+- Take us through the example dataset
+- Do some other garbage
 
 https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/tutorials/run-main-pipeline/stereo-seq-ff
+
+
+# h5ad examination
+
+
+# Cell type decomposition with RCTD
+
+A feature of this particular dataset is matched single cell data. Having this information is fantastic as it gives a reference to perform cell type decomposition.
+
+Note: it is possible to do cell-type deconvolution without a reference, with methods such as SCDeconvolve
+
+
+Robust decomposition of cell type
+mixtures in spatial transcriptomics 
+
+- todo, how to run this?
+
+- also todo, maybe some of the cleaning methods...
+
+https://www.nature.com/articles/s41587-021-00830-w
+
+The paper also has the code uploaded: https://github.com/haoshijie13/LISTA
+
+https://github.com/haoshijie13/LISTA/blob/main/00.run_RCTD.R
+
+single cell data: 
+https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM5764269&format=file&file=GSM5764269%5Ffiltered%5Ffeature%5Fbc%5Fmatrix%5FCS89%2Eh5
+
+TODO: ask cathal how he's going with this
+

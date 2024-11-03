@@ -1,0 +1,74 @@
+---
+title: "Data download"
+editor_options:
+  chunk_output_type: console
+---
+
+```{r, include=FALSE}
+
+options(timeout = 600) # Increase download timeout
+
+# Function to download data only if it doesn't exist
+# TODO: should probably checksum existing files
+download_missing <- function(url, destfile) {
+  if (!file.exists(destfile)) {
+    download.file(url = url, destfile = destfile)
+  }
+}
+```
+
+## Mouse brain (demo Stereo-seq v1.3 data)
+
+We will be exploring a demo mouse brain dataset made public by STOmics:
+
+![](assets/mmbrain.png "Stereo-seq mouse brain FF v1.3")
+
+Although not required for this workshop, the raw data and additional demo 
+datasets are available to download [here](https://en.stomics.tech/resources/demo-data/list.html).
+
+SAW (Stereo-seq Analysis Workflow) v8.1 was run to generate several output files that
+we will explore. The processed data will not be available indefinitely, however
+later you will see how to regenerate it for yourself. TODO: link to notebook.
+
+You can download the [SAW report here](https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&files_ids=23488227).
+
+
+```{r}
+# Download report
+
+download_missing(url="https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&files_ids=23488227", destfile="data/C04042E3.report.tar.gz")
+```
+
+A primary output of SAW v8.1 is [visualization.tar.gz](https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&files_ids=23488224). We will be extracting this file and examining the contents.
+
+> **Warning:** Relatively large file (4.9GB)!
+
+```{r}
+# Download visualization.tar.gz
+
+download_missing(url="https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&files_ids=23488224", destfile="data/visualization.tar.gz")
+```
+
+## Mouse liver (published Stereo-seq v1.2 data)
+
+For our later downstream analysis, we will be using the following 
+anndata-compatible data file:  
+[DY1_D0_stereo-seq.h5ad](https://filesender.aarnet.edu.au/download.php?token=1beae7a9-436e-4915-9e01-4f24360140aa&files_ids=23496582)
+
+> **Warning:** Relatively large file (4.4GB)!
+
+```{r}
+# Download LISTA data
+
+download_missing(url="https://filesender.aarnet.edu.au/download.php?token=1beae7a9-436e-4915-9e01-4f24360140aa&files_ids=23496582", destfile="data/DY1_D0_stereo-seq.h5ad")
+```
+
+The above link is only temporarily available for this workshop, but the data will 
+be available later on from [CNGBdb](https://ftp.cngb.org/pub/SciRAID/stomics/STDS0000059/Stereo-seq/DY1_D0_stereo-seq.h5ad).
+
+This file is from [LISTA: LIver Spatio-Temporal Atlas](https://db.cngb.org/stomics/lista/), 
+in which Stereo-seq to profile mouse liver homeostasis and  regeneration 
+following partial hepatectomy over several time points. Our file is
+from day 0, the first time point following hepatectomy. 
+
+TODO: Matched single cell data is also available to download from [here]()

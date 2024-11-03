@@ -6,3 +6,7 @@ seed: 20241102
 # The working directory to build the R Markdown files. The path is relative to
 # _workflowr.yml. See ?rmarkdown::render for details.
 knit_root_dir: "."
+
+name: STOmics_workshop_ABACBS
+suppress_report: TRUE
+sessioninfo: ""
