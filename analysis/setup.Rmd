@@ -89,6 +89,7 @@ git clone https://github.com/sagc-bioinformatics/abacbs2024_workshop.git
 
 # Obtaining the data
 
-Once you have cloned the repository, navigate to RStudio, and run the download workbook
+Once you have cloned the repository, navigate to RStudio, load the project file
+(`abacbs_workshop.Rproj`) and run the download workbook
 [(download.Rmd)](download.html) to download the data files.
 

@@ -17,6 +17,9 @@ download_missing <- function(url, destfile) {
 }
 ```
 
+Note: You don't need to manually download everything here - please follow the
+instructions from [the setup page](setup.html#obtaining-the-code) to run this workbook.
+
 ## Mouse brain (demo Stereo-seq v1.3 data)
 
 We will be exploring a demo mouse brain dataset made public by STOmics:
@@ -28,7 +31,7 @@ datasets are available to download [here](https://en.stomics.tech/resources/demo
 
 SAW (Stereo-seq Analysis Workflow) v8.1 was run to generate several output files that
 we will explore. The processed data will not be available indefinitely, however
-later you will see how to regenerate it for yourself. TODO: link to notebook.
+later you will see how to regenerate it for yourself. (See the [SAW page](SAW.html#processing-data-with-saw))
 
 You can download the [SAW report here](https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&files_ids=23488227).
 

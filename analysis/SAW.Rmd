@@ -1,12 +1,64 @@
 
+# Stereo-seq background
 
-# Plan
+In Stereo-seq builds upon the DNBSEQ chips that are already used in MGI DNA nanoball sequencing (DNBSEQ). For background on DNBSEQ, see [here](https://mgi-tech.eu/technology).
 
-- Background on Stereo-seq, available options (OMNI vs latest chemistry)
-- Information on available processing methods
+The chips are patterned, with fixed spots of 220 nm and a distance of 500 or 715 nm.
+
+The first step is to deposit DNB templates with random barcodes on the chip, which is sequenced to obtain the CID (coordinate ID) of each DNB. This is the “mask file”, which is basically just a big matrix which barcodes correspond to which locations, and is required to run SAW. 
+ 
+
+Then, oligos with MIDs (molecular IDs) and polyT sequences are ligated to each spot.  
+
+Next, the tissue is loaded onto the chip, followed by fixation and permeabilization to capture polyA RNAs.
+
+Finally, cDNA is generated via reverse transcription and amplification and used
+as a template for library prep.
+
+More information on Stereo-seq can be found in the [paper]("https://www.cell.com/cell/fulltext/S0092-8674(22)00399-3")
+
+
+## Available versions
+
+- Current fresh-frozen kit version is v1.3
+- OMNI is the new FFPE offering, which also uses total RNA
+
+# Processing data with SAW
+
+Once your experiment is complete, you will have the following:
+
+- Mask file
+- Fastq files
+
+You will need to process the data using Stereo-seq Analysis Workflow (SAW).
+
+The latest version of SAW is 8.1, with reference documentation found here:
+
+https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1
+
+- We're going to see where to download SAW and how to run it
+
+## Obtaining SAW
+
+
+
+Next, I'm going to show you how to use SAW to:
+
+- check your annotation is valid
+- build a reference (I'm using GRCm39 from GENCODE)
+
+
+## SAW makeRef
+
+
+## SAW count
+
+
+## Next steps
+
 - Description of what you get back (compare SAW versions)
   - mention where you can get it, why not here
 - Take us through the example dataset
 
-https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/tutorials/run-main-pipeline/stereo-seq-ff
 
+https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/tutorials/run-main-pipeline/stereo-seq-ff

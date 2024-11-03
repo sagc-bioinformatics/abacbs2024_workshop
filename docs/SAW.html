@@ -373,48 +373,77 @@ div.tocify {
 </div>
 
 
-<div id="plan" class="section level1">
-<h1>Plan</h1>
+<div id="stereo-seq-background" class="section level1">
+<h1>Stereo-seq background</h1>
+<p>In Stereo-seq builds upon the DNBSEQ chips that are already used in
+MGI DNA nanoball sequencing (DNBSEQ). For background on DNBSEQ, see <a
+href="https://mgi-tech.eu/technology">here</a>.</p>
+<p>The chips are patterned, with fixed spots of 220 nm and a distance of
+500 or 715 nm.</p>
+<p>The first step is to deposit DNB templates with random barcodes on
+the chip, which is sequenced to obtain the CID (coordinate ID) of each
+DNB. This is the “mask file”, which is basically just a big matrix which
+barcodes correspond to which locations, and is required to run SAW.</p>
+<p>Then, oligos with MIDs (molecular IDs) and polyT sequences are
+ligated to each spot.</p>
+<p>Next, the tissue is loaded onto the chip, followed by fixation and
+permeabilization to capture polyA RNAs.</p>
+<p>Finally, cDNA is generated via reverse transcription and
+amplification and used as a template for library prep.</p>
+<p>More information on Stereo-seq can be found in the <a
+href="%22https://www.cell.com/cell/fulltext/S0092-8674(22)00399-3%22">paper</a></p>
+<div id="available-versions" class="section level2">
+<h2>Available versions</h2>
 <ul>
-<li>Background on Stereo-seq, available options (OMNI vs latest
-chemistry)</li>
-<li>Information on available processing methods</li>
-<li>Description of what you get back (compare SAW versions)</li>
+<li>Current fresh-frozen kit version is v1.3</li>
+<li>OMNI is the new FFPE offering, which also uses total RNA</li>
+</ul>
+</div>
+</div>
+<div id="processing-data-with-saw" class="section level1">
+<h1>Processing data with SAW</h1>
+<p>Once your experiment is complete, you will have the following:</p>
+<ul>
+<li>Mask file</li>
+<li>Fastq files</li>
+</ul>
+<p>You will need to process the data using Stereo-seq Analysis Workflow
+(SAW).</p>
+<p>The latest version of SAW is 8.1, with reference documentation found
+here:</p>
+<p><a
+href="https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1"
+class="uri">https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1</a></p>
+<ul>
+<li>We’re going to see where to download SAW and how to run it</li>
+</ul>
+<div id="obtaining-saw" class="section level2">
+<h2>Obtaining SAW</h2>
+<p>Next, I’m going to show you how to use SAW to:</p>
+<ul>
+<li>check your annotation is valid</li>
+<li>build a reference (I’m using GRCm39 from GENCODE)</li>
+</ul>
+</div>
+<div id="saw-makeref" class="section level2">
+<h2>SAW makeRef</h2>
+</div>
+<div id="saw-count" class="section level2">
+<h2>SAW count</h2>
+</div>
+<div id="next-steps" class="section level2">
+<h2>Next steps</h2>
+<ul>
+<li>Description of what you get back (compare SAW versions)
+<ul>
+<li>mention where you can get it, why not here</li>
+</ul></li>
 <li>Take us through the example dataset</li>
-<li>Do some other garbage</li>
 </ul>
 <p><a
 href="https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/tutorials/run-main-pipeline/stereo-seq-ff"
 class="uri">https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/tutorials/run-main-pipeline/stereo-seq-ff</a></p>
 </div>
-<div id="h5ad-examination" class="section level1">
-<h1>h5ad examination</h1>
-</div>
-<div id="cell-type-decomposition-with-rctd" class="section level1">
-<h1>Cell type decomposition with RCTD</h1>
-<p>A feature of this particular dataset is matched single cell data.
-Having this information is fantastic as it gives a reference to perform
-cell type decomposition.</p>
-<p>Note: it is possible to do cell-type deconvolution without a
-reference, with methods such as SCDeconvolve</p>
-<p>Robust decomposition of cell type mixtures in spatial
-transcriptomics</p>
-<ul>
-<li><p>todo, how to run this?</p></li>
-<li><p>also todo, maybe some of the cleaning methods…</p></li>
-</ul>
-<p><a href="https://www.nature.com/articles/s41587-021-00830-w"
-class="uri">https://www.nature.com/articles/s41587-021-00830-w</a></p>
-<p>The paper also has the code uploaded: <a
-href="https://github.com/haoshijie13/LISTA"
-class="uri">https://github.com/haoshijie13/LISTA</a></p>
-<p><a
-href="https://github.com/haoshijie13/LISTA/blob/main/00.run_RCTD.R"
-class="uri">https://github.com/haoshijie13/LISTA/blob/main/00.run_RCTD.R</a></p>
-<p>single cell data: <a
-href="https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM5764269&amp;format=file&amp;file=GSM5764269%5Ffiltered%5Ffeature%5Fbc%5Fmatrix%5FCS89%2Eh5"
-class="uri">https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM5764269&amp;format=file&amp;file=GSM5764269%5Ffiltered%5Ffeature%5Fbc%5Fmatrix%5FCS89%2Eh5</a></p>
-<p>TODO: ask cathal how he’s going with this</p>
 </div>
 
 
