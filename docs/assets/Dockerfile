@@ -69,7 +69,7 @@ EXPOSE 8787 8888
 # Create a startup script
 RUN echo '#!/bin/bash\n\
 jupyter lab --ip 0.0.0.0 --port 8888 --allow-root --no-browser &\n\
-/usr/lib/rstudio-server/bin/rserver --server-daemonize=0 --auth-cookies-force-secure=1 --auth-minimum-user-id=0 \n\
+/usr/lib/rstudio-server/bin/rserver --server-daemonize=0 --auth-minimum-user-id=0 \n\
 ' > /usr/local/bin/start-services.sh && \
     chmod +x /usr/local/bin/start-services.sh
 
