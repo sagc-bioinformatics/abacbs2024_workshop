@@ -49,7 +49,7 @@ A primary output of SAW v8.1 is [visualization.tar.gz](https://filesender.aarnet
 download_missing(url="https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&files_ids=23488224", destfile="data/visualization.tar.gz")
 ```
 
-## Mouse liver (published Stereo-seq v1.2 data)
+## Mouse liver (published data)
 
 For our later downstream analysis, we will be using the following 
 anndata-compatible data file:  
