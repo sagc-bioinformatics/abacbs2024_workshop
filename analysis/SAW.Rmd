@@ -25,7 +25,7 @@ More information on Stereo-seq can be found in the [paper]("https://www.cell.com
 
 ## Available versions
 
-- Current fresh-frozen kit version is v1.3
+- Current fresh-frozen (FF) kit version is v1.3
 - OMNI is the new FFPE offering, which also uses total RNA
 
 # Processing data with SAW
