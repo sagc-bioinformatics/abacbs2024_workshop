@@ -1,7 +1,7 @@
-# abacbs_workshop
+# Stereo-seq workshop (for ABACBS 2024)
 
-A [workflowr][] project.
+Please see the [workshop website](https://sagc-bioinformatics.github.io/abacbs2024_workshop/).
 
-[workflowr]: https://github.com/workflowr/workflowr
+This is a [workflowr]: https://github.com/workflowr/workflowr project, containing the source code
+for our STOmics Stereo-seq workshop at ABACBS 2024.
 
-[getting started]: https://workflowr.github.io/workflowr/articles/wflow-01-getting-started.html
