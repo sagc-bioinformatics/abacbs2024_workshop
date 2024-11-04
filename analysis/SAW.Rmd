@@ -7,7 +7,7 @@ editor_options:
 
 # Stereo-seq background
 
-Stereo-seq builds upon the chip technology already used in MGI DNA nanoball sequencing (DNBSEQ). For background on DNBSEQ, see [here](https://mgi-tech.eu/technology).
+Stereo-seq (SpaTial Enhanced Resolution Omics-sequencing) builds upon the chip technology already used in MGI DNA nanoball sequencing (DNBSEQ). For background on DNBSEQ, see [here](https://mgi-tech.eu/technology).
 
 The chips are patterned, with fixed spots of 220 nm in diameter and spaced at a distance of 500 or 715 nm. The standard chip size is 1cm x 1cm, but the largest size
 available does go up to 13cm x 13cm (fresh frozen samples only).
