@@ -75,3 +75,7 @@ following partial hepatectomy over several time points. Our file is
 from day 0, the first time point following hepatectomy. 
 
 TODO: Matched single cell data is also available to download from [here]()
+
+## Next steps
+
+Once the data has downloaded, you're ready to move on with [Part 1](SAW.html)!

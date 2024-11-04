@@ -71,7 +71,7 @@ saw makeRef \
 
 Notes:
 
-- The GENCODE GRCm39 reference was used
+- The [GENCODE GRCm39 reference](https://www.gencodegenes.org/mouse/) was used
 - The `--genome` parameter actually specifies the name of the output directory
 - There is no way to pass parameters to STAR in this version.
 
@@ -120,4 +120,8 @@ https://en.stomics.tech/products/stomics-software/stomics-offline-software/list.
 # StereoPy
 
 https://stereopy.readthedocs.io/en/latest/content/01_Usage_principles.html
+
+# Next steps
+
+After the break, we'll move on with [Part 2](SAW.html), and see how to do some downstream analysis!
 
