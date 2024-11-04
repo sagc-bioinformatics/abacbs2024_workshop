@@ -37,22 +37,28 @@ Once your experiment is complete, you will have the following:
 - Fastq files
 
 You will need to process the data using Stereo-seq Analysis Workflow (SAW).
+This command-line tool provides similar functionality for Stereo-seq to what
+Spaceranger provides for 10x spatial platforms.
 
 The latest version of SAW is 8.1, with reference documentation found here:
 
 https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1
 
-- We're going to see where to download SAW and how to run it
+Actually building a reference and running SAW will take quite a long time, so
+we won't actually run it for this workshop. However, we'll walk through the 
+steps and then take a look at some pre-processed files.
 
 ## Obtaining SAW
 
+You can download the latest version of SAW from the [STOmics download page](https://en.stomics.tech/products/stomics-software/stomics-offline-software/list.html) (does require making an account).
 
+Alternatively, you can find earlier versions of SAW on [Github](https://github.com/STOmics/SAW). Please note that the interface has 
+changed significantly between versions 7.x and 8.x. Version 8.x introduces
+both internal workflow management with Snakemake, and compatibility with OMNI.
 
-Next, I'm going to show you how to use SAW to:
+The documentation for using SAW v8.1 with fresh-frozen datasets can be found here: https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/tutorials/run-main-pipeline/stereo-seq-ff
 
-- check your annotation is valid
-- build a reference (I'm using GRCm39 from GENCODE)
-
+In addition, `saw --help` and subcommands (e.g. `saw count --help`) provide more information.
 
 ## SAW makeRef
 
@@ -75,11 +81,15 @@ Notes:
 - The `--genome` parameter actually specifies the name of the output directory
 - There is no way to pass parameters to STAR in this version.
 
-To have more control over the parameters used, you can use version 7.x of SAW,
-which is [available on github](https://github.com/STOmics/SAW).
+To have more control over the parameters used, you can use version 7.x of SAW [from Github](https://github.com/STOmics/SAW). This version is implemented as a bash
+script which calls into a container image, and is easier to customise (and easier
+to break). 
 
 
 ## SAW count
+
+Next, we want to run the main pipeline which is called via `saw count`.
+Here's how it was run for this demo:
 
 ```{bash, eval=FALSE}
 #!/bin/bash
@@ -105,23 +115,65 @@ Notes:
 - `--fastqs` points to a directory containing fastq file pairs. More than one pair can be present (e.g. if multiple sequencing runs or lanes were used) 
 - `--organism` and `--tissue` can be any string
 
-## Next steps
+Once this is complete, an `outs` directory will be created similar to this:
 
-- Description of what you get back (compare SAW versions)
-  - mention where you can get it, why not here
-- Take us through the example dataset
+```{bash, eval=FALSE}
+$ tree outs/
+.
+├── analysis
+│   ├── C04042E3.bin20_1.0.h5ad
+│   ├── C04042E3.bin20_1.0.marker_features.csv
+│   ├── C04042E3.bin50_1.0.h5ad
+│   ├── C04042E3.bin50_1.0.marker_features.csv
+│   ├── C04042E3.cellbin_1.0.adjusted.h5ad
+│   ├── C04042E3.cellbin_1.0.adjusted.marker_features.csv
+│   ├── C04042E3.cellbin_1.0.h5ad
+│   └── C04042E3.cellbin_1.0.marker_features.csv
+├── bam
+│   └── annotated_bam
+│       ├── C04042E3.Aligned.sortedByCoord.out.merge.q10.dedup.target.bam
+│       └── C04042E3.Aligned.sortedByCoord.out.merge.q10.dedup.target.bam.csi
+├── C04042E3.report.tar.gz
+├── feature_expression
+│   ├── C04042E3.adjusted.cellbin.gef
+│   ├── C04042E3.cellbin.gef
+│   ├── C04042E3.merge.barcodeReadsCount.txt
+│   ├── C04042E3_raw_barcode_gene_exp.txt
+│   ├── C04042E3.raw.gef
+│   └── C04042E3.tissue.gef
+├── image
+│   ├── C04042E3_HE_mask_edm_dis_10.tif
+│   ├── C04042E3_HE_mask.tif
+│   ├── C04042E3_HE_regist.tif
+│   └── C04042E3_HE_tissue_cut.tif
+├── visualization.tar.gz
+└── visualization.tar.gz.md5
+```
 
-https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/tutorials/run-main-pipeline/stereo-seq-ff
+Let's discuss what these files contain.
 
 # StereoMap
 
-https://en.stomics.tech/products/stomics-software/stomics-offline-software/list.html
+StereoMap is an interactive tool to examine your Stereo-seq data (similar to
+Loupe Browser from 10x).
+
+StereoMap can be downloaded from STOmics directly: https://en.stomics.tech/products/stomics-software/stomics-offline-software/list.html
+
+StereoMap v4.1 is compatible with SAW v8.1. Previous versions also included
+image QC in a seperate program, ImageStudio, which is now integrated with 
+StereoMap.
+
+## TODO: demo basic tasks
 
 # StereoPy
 
+StereoPy is a Python library designed to work with Stereo-seq data.
+
 https://stereopy.readthedocs.io/en/latest/content/01_Usage_principles.html
+
+We will use it to investigate our data over on JupyterLab.
 
 # Next steps
 
-After the break, we'll move on with [Part 2](SAW.html), and see how to do some downstream analysis!
+After the break, we'll move on with [Part 2](downstream.html), and see how to do some downstream analysis!
 

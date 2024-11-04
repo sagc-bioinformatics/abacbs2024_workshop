@@ -409,22 +409,32 @@ href="%22https://www.cell.com/cell/fulltext/S0092-8674(22)00399-3%22">paper</a><
 <li>Fastq files</li>
 </ul>
 <p>You will need to process the data using Stereo-seq Analysis Workflow
-(SAW).</p>
+(SAW). This command-line tool provides similar functionality for
+Stereo-seq to what Spaceranger provides for 10x spatial platforms.</p>
 <p>The latest version of SAW is 8.1, with reference documentation found
 here:</p>
 <p><a
 href="https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1"
 class="uri">https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1</a></p>
-<ul>
-<li>We’re going to see where to download SAW and how to run it</li>
-</ul>
+<p>Actually building a reference and running SAW will take quite a long
+time, so we won’t actually run it for this workshop. However, we’ll walk
+through the steps and then take a look at some pre-processed files.</p>
 <div id="obtaining-saw" class="section level2">
 <h2>Obtaining SAW</h2>
-<p>Next, I’m going to show you how to use SAW to:</p>
-<ul>
-<li>check your annotation is valid</li>
-<li>build a reference (I’m using GRCm39 from GENCODE)</li>
-</ul>
+<p>You can download the latest version of SAW from the <a
+href="https://en.stomics.tech/products/stomics-software/stomics-offline-software/list.html">STOmics
+download page</a> (does require making an account).</p>
+<p>Alternatively, you can find earlier versions of SAW on <a
+href="https://github.com/STOmics/SAW">Github</a>. Please note that the
+interface has changed significantly between versions 7.x and 8.x.
+Version 8.x introduces both internal workflow management with Snakemake,
+and compatibility with OMNI.</p>
+<p>The documentation for using SAW v8.1 with fresh-frozen datasets can
+be found here: <a
+href="https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/tutorials/run-main-pipeline/stereo-seq-ff"
+class="uri">https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/tutorials/run-main-pipeline/stereo-seq-ff</a></p>
+<p>In addition, <code>saw --help</code> and subcommands
+(e.g. <code>saw count --help</code>) provide more information.</p>
 </div>
 <div id="saw-makeref" class="section level2">
 <h2>SAW makeRef</h2>
@@ -446,11 +456,14 @@ the output directory</li>
 <li>There is no way to pass parameters to STAR in this version.</li>
 </ul>
 <p>To have more control over the parameters used, you can use version
-7.x of SAW, which is <a href="https://github.com/STOmics/SAW">available
-on github</a>.</p>
+7.x of SAW <a href="https://github.com/STOmics/SAW">from Github</a>.
+This version is implemented as a bash script which calls into a
+container image, and is easier to customise (and easier to break).</p>
 </div>
 <div id="saw-count" class="section level2">
 <h2>SAW count</h2>
+<p>Next, we want to run the main pipeline which is called via
+<code>saw count</code>. Here’s how it was run for this demo:</p>
 <pre class="bash"><code>#!/bin/bash
 
 saw count \
@@ -478,37 +491,68 @@ runs or lanes were used)</li>
 <li><code>--organism</code> and <code>--tissue</code> can be any
 string</li>
 </ul>
-</div>
-<div id="next-steps" class="section level2">
-<h2>Next steps</h2>
-<ul>
-<li>Description of what you get back (compare SAW versions)
-<ul>
-<li>mention where you can get it, why not here</li>
-</ul></li>
-<li>Take us through the example dataset</li>
-</ul>
-<p><a
-href="https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/tutorials/run-main-pipeline/stereo-seq-ff"
-class="uri">https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/tutorials/run-main-pipeline/stereo-seq-ff</a></p>
+<p>Once this is complete, an <code>outs</code> directory will be created
+similar to this:</p>
+<pre class="bash"><code>$ tree outs/
+.
+├── analysis
+│   ├── C04042E3.bin20_1.0.h5ad
+│   ├── C04042E3.bin20_1.0.marker_features.csv
+│   ├── C04042E3.bin50_1.0.h5ad
+│   ├── C04042E3.bin50_1.0.marker_features.csv
+│   ├── C04042E3.cellbin_1.0.adjusted.h5ad
+│   ├── C04042E3.cellbin_1.0.adjusted.marker_features.csv
+│   ├── C04042E3.cellbin_1.0.h5ad
+│   └── C04042E3.cellbin_1.0.marker_features.csv
+├── bam
+│   └── annotated_bam
+│       ├── C04042E3.Aligned.sortedByCoord.out.merge.q10.dedup.target.bam
+│       └── C04042E3.Aligned.sortedByCoord.out.merge.q10.dedup.target.bam.csi
+├── C04042E3.report.tar.gz
+├── feature_expression
+│   ├── C04042E3.adjusted.cellbin.gef
+│   ├── C04042E3.cellbin.gef
+│   ├── C04042E3.merge.barcodeReadsCount.txt
+│   ├── C04042E3_raw_barcode_gene_exp.txt
+│   ├── C04042E3.raw.gef
+│   └── C04042E3.tissue.gef
+├── image
+│   ├── C04042E3_HE_mask_edm_dis_10.tif
+│   ├── C04042E3_HE_mask.tif
+│   ├── C04042E3_HE_regist.tif
+│   └── C04042E3_HE_tissue_cut.tif
+├── visualization.tar.gz
+└── visualization.tar.gz.md5</code></pre>
+<p>Let’s discuss what these files contain.</p>
 </div>
 </div>
 <div id="stereomap" class="section level1">
 <h1>StereoMap</h1>
-<p><a
+<p>StereoMap is an interactive tool to examine your Stereo-seq data
+(similar to Loupe Browser from 10x).</p>
+<p>StereoMap can be downloaded from STOmics directly: <a
 href="https://en.stomics.tech/products/stomics-software/stomics-offline-software/list.html"
 class="uri">https://en.stomics.tech/products/stomics-software/stomics-offline-software/list.html</a></p>
+<p>StereoMap v4.1 is compatible with SAW v8.1. Previous versions also
+included image QC in a seperate program, ImageStudio, which is now
+integrated with StereoMap.</p>
+<div id="todo-demo-basic-tasks" class="section level2">
+<h2>TODO: demo basic tasks</h2>
+</div>
 </div>
 <div id="stereopy" class="section level1">
 <h1>StereoPy</h1>
+<p>StereoPy is a Python library designed to work with Stereo-seq
+data.</p>
 <p><a
 href="https://stereopy.readthedocs.io/en/latest/content/01_Usage_principles.html"
 class="uri">https://stereopy.readthedocs.io/en/latest/content/01_Usage_principles.html</a></p>
+<p>We will use it to investigate our data over on JupyterLab.</p>
 </div>
-<div id="next-steps-1" class="section level1">
+<div id="next-steps" class="section level1">
 <h1>Next steps</h1>
-<p>After the break, we’ll move on with <a href="SAW.html">Part 2</a>,
-and see how to do some downstream analysis!</p>
+<p>After the break, we’ll move on with <a href="downstream.html">Part
+2</a>, and see how to do some downstream analysis!</p>
 </div>
 
 

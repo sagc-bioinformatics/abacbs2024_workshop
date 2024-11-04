@@ -16,12 +16,13 @@ Please see the [ABACBS 2024](https://www.abacbs.org/conference2024/workshop) wor
 
 To get started, please refer to the [setup](setup.html) page.
 
+## Schedule
 
 | Time  | Topic                                 |
 |:------|:--------------------------------------|
 | 9:00  | [Part 1 (Intro and SAW)](SAW.html)    |
 | 10:00 | Morning tea                           |
-| 10:30 | [Part 2 (Downstream)](downstream.html)       |
+| 10:30 | [Part 2 (Downstream)](downstream.html)|
 | 11:30 | End of workshop                       |
 
 

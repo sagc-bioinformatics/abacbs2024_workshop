@@ -374,36 +374,38 @@ div.tocify {
 </div>
 
 
-<div id="h5ad-examination" class="section level1">
-<h1>h5ad examination</h1>
+<div id="downstream-analysis" class="section level1">
+<h1>Downstream analysis</h1>
+<div id="examining-the-h5ad-file" class="section level2">
+<h2>Examining the h5ad file</h2>
 <ul>
-<li>convert to other file</li>
+<li>We’ll convert this into a Seurat-compatible object</li>
 </ul>
 </div>
-<div id="cell-type-decomposition-with-rctd" class="section level1">
-<h1>Cell type decomposition with RCTD</h1>
+<div id="cell-type-decomposition-with-rctd" class="section level2">
+<h2>Cell type decomposition with RCTD</h2>
 <p>A feature of this particular dataset is matched single cell data.
 Having this information is fantastic as it gives a reference to perform
-cell type decomposition.</p>
+cell type decomposition. The paper used <a
+href="https://www.nature.com/articles/s41587-021-00830-w">RCTD</a> for
+this.</p>
 <p>Note: it is possible to do cell-type deconvolution without a
 reference, with methods such as SCDeconvolve</p>
-<p>Robust decomposition of cell type mixtures in spatial
-transcriptomics</p>
 <ul>
-<li><p>todo, how to run this?</p></li>
-<li><p>also todo, maybe some of the cleaning methods…</p></li>
+<li>TODO, maybe demonstrate some cleaning methods, e.g. <a
+href="https://www.nature.com/articles/s41467-022-30587-y">SpotClean</a></li>
 </ul>
-<p><a href="https://www.nature.com/articles/s41587-021-00830-w"
-class="uri">https://www.nature.com/articles/s41587-021-00830-w</a></p>
 <p>The paper also has the code uploaded: <a
 href="https://github.com/haoshijie13/LISTA"
-class="uri">https://github.com/haoshijie13/LISTA</a></p>
-<p><a
+class="uri">https://github.com/haoshijie13/LISTA</a>, <a
 href="https://github.com/haoshijie13/LISTA/blob/main/00.run_RCTD.R"
 class="uri">https://github.com/haoshijie13/LISTA/blob/main/00.run_RCTD.R</a></p>
-<p>single cell data: <a
+<ul>
+<li>Single cell data: <a
 href="https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM5764269&amp;format=file&amp;file=GSM5764269%5Ffiltered%5Ffeature%5Fbc%5Fmatrix%5FCS89%2Eh5"
-class="uri">https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM5764269&amp;format=file&amp;file=GSM5764269%5Ffiltered%5Ffeature%5Fbc%5Fmatrix%5FCS89%2Eh5</a></p>
+class="uri">https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM5764269&amp;format=file&amp;file=GSM5764269%5Ffiltered%5Ffeature%5Fbc%5Fmatrix%5FCS89%2Eh5</a></li>
+</ul>
+</div>
 </div>
 
 

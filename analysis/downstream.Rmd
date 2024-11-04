@@ -5,29 +5,24 @@ editor_options:
   chunk_output_type: console
 ---
 
-# h5ad examination
+# Downstream analysis
 
-- convert to other file
 
-# Cell type decomposition with RCTD
+## Examining the h5ad file
 
-A feature of this particular dataset is matched single cell data. Having this information is fantastic as it gives a reference to perform cell type decomposition.
+- We'll convert this into a Seurat-compatible object
+
+## Cell type decomposition with RCTD
+
+
+A feature of this particular dataset is matched single cell data. Having this information is fantastic as it gives a reference to perform cell type decomposition. The paper used [RCTD](https://www.nature.com/articles/s41587-021-00830-w) for this.
+
 
 Note: it is possible to do cell-type deconvolution without a reference, with methods such as SCDeconvolve
 
+- TODO, maybe demonstrate some cleaning methods, e.g. [SpotClean](https://www.nature.com/articles/s41467-022-30587-y)
 
-Robust decomposition of cell type
-mixtures in spatial transcriptomics 
+The paper also has the code uploaded: https://github.com/haoshijie13/LISTA, https://github.com/haoshijie13/LISTA/blob/main/00.run_RCTD.R
 
-- todo, how to run this?
-
-- also todo, maybe some of the cleaning methods...
-
-https://www.nature.com/articles/s41587-021-00830-w
-
-The paper also has the code uploaded: https://github.com/haoshijie13/LISTA
-
-https://github.com/haoshijie13/LISTA/blob/main/00.run_RCTD.R
-
-single cell data: 
+- Single cell data: 
 https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM5764269&format=file&file=GSM5764269%5Ffiltered%5Ffeature%5Fbc%5Fmatrix%5FCS89%2Eh5
