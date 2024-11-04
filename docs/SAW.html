@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -231,6 +234,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -238,6 +310,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -268,9 +350,6 @@ $(document).ready(function () {
 </li>
 <li>
   <a href="downstream.html">Part 2</a>
-</li>
-<li>
-  <a href="about.html">About</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -349,9 +428,55 @@ class="uri">https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1</a
 </div>
 <div id="saw-makeref" class="section level2">
 <h2>SAW makeRef</h2>
+<p>SAW v8.1 is quite easy to use, but not yet very configurable. To
+build the reference for this example, here’s the command I used:</p>
+<pre class="bash"><code>#!/bin/bash
+
+saw makeRef \
+    --mode=STAR \
+    --fasta=/path/to/GRCm39.genome.fa \
+    --gtf=/path/to/annotation.gtf \
+    --genome=/path/to/reference/output</code></pre>
+<p>Notes:</p>
+<ul>
+<li>The GENCODE GRCm39 reference was used</li>
+<li>The <code>--genome</code> parameter actually specifies the name of
+the output directory</li>
+<li>There is no way to pass parameters to STAR in this version.</li>
+</ul>
+<p>To have more control over the parameters used, you can use version
+7.x of SAW, which is <a href="https://github.com/STOmics/SAW">available
+on github</a>.</p>
 </div>
 <div id="saw-count" class="section level2">
 <h2>SAW count</h2>
+<pre class="bash"><code>#!/bin/bash
+
+saw count \
+    --id=workshop_demo \
+    --sn=C04042E3 \
+    --chip-mask=&quot;/path/to/C04042E3.barcodeToPos.h5&quot; \
+    --omics=transcriptomics \
+    --kit-version=&quot;Stereo-seq T FF V1.3&quot; \
+    --sequencing-type=&quot;PE75_50+100&quot; \
+    --organism=mouse \
+    --tissue=brain \
+    --fastqs=/path/to/fastq/directory/ \
+    --image-tar=&quot;/path/to/C04042E3_SC_20240925_142342_4.1.0.tar.gz&quot; \
+    --reference=/path/to/reference/output</code></pre>
+<p>Notes:</p>
+<ul>
+<li><code>--reference</code> here should point to the directory
+specified in the <code>--genome</code> parameter of
+<code>saw makeRef</code></li>
+<li><code>--image-tar</code> accepts image files processed by <a
+href="#stereomap">StereoMap</a> or ImageStudio, and is optional</li>
+<li><code>--fastqs</code> points to a directory containing fastq file
+pairs. More than one pair can be present (e.g. if multiple sequencing
+runs or lanes were used)</li>
+<li><code>--organism</code> and <code>--tissue</code> can be any
+string</li>
+</ul>
 </div>
 <div id="next-steps" class="section level2">
 <h2>Next steps</h2>
@@ -390,6 +515,8 @@ footer is added to webpages before the MathJax javascript. -->
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -422,6 +549,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

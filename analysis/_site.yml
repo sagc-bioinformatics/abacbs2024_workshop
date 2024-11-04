@@ -14,8 +14,6 @@ navbar:
     href: SAW.html
   - text: Part 2
     href: downstream.html
-  - text: About
-    href: about.html
   right:
   - icon: fab fa-github
     text: Source code

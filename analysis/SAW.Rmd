@@ -1,9 +1,6 @@
 ---
 title: "Part 1"
 site: workflowr::wflow_site
-output:
-  workflowr::wflow_html:
-    toc: false
 editor_options:
   chunk_output_type: console
 ---
@@ -59,16 +56,60 @@ Next, I'm going to show you how to use SAW to:
 
 ## SAW makeRef
 
+SAW v8.1 is quite easy to use, but not yet very configurable.
+To build the reference for this example, here's the command I used:
+
+```{bash, eval=FALSE}
+#!/bin/bash
+
+saw makeRef \
+    --mode=STAR \
+    --fasta=/path/to/GRCm39.genome.fa \
+    --gtf=/path/to/annotation.gtf \
+    --genome=/path/to/reference/output
+```
+
+Notes:
+
+- The GENCODE GRCm39 reference was used
+- The `--genome` parameter actually specifies the name of the output directory
+- There is no way to pass parameters to STAR in this version.
+
+To have more control over the parameters used, you can use version 7.x of SAW,
+which is [available on github](https://github.com/STOmics/SAW).
+
 
 ## SAW count
 
+```{bash, eval=FALSE}
+#!/bin/bash
+
+saw count \
+    --id=workshop_demo \
+    --sn=C04042E3 \
+    --chip-mask="/path/to/C04042E3.barcodeToPos.h5" \
+    --omics=transcriptomics \
+    --kit-version="Stereo-seq T FF V1.3" \
+    --sequencing-type="PE75_50+100" \
+    --organism=mouse \
+    --tissue=brain \
+    --fastqs=/path/to/fastq/directory/ \
+    --image-tar="/path/to/C04042E3_SC_20240925_142342_4.1.0.tar.gz" \
+    --reference=/path/to/reference/output
+```
+
+Notes:
+
+- `--reference` here should point to the directory specified in the `--genome` parameter of `saw makeRef`
+- `--image-tar` accepts image files processed by [StereoMap](#stereomap) or ImageStudio, and is optional
+- `--fastqs` points to a directory containing fastq file pairs. More than one pair can be present (e.g. if multiple sequencing runs or lanes were used) 
+- `--organism` and `--tissue` can be any string
 
 ## Next steps
 
 - Description of what you get back (compare SAW versions)
   - mention where you can get it, why not here
 - Take us through the example dataset
-
 
 https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/tutorials/run-main-pipeline/stereo-seq-ff
 
