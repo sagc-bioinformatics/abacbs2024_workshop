@@ -25,4 +25,4 @@ To get started, please refer to the [setup](setup.html) page.
 | 11:30 | End of workshop                       |
 
 
-[![](assets/sagc.png "SAGC")](https://sa-genomics.com.au)
+[<img src="assets/sagc-01.png" alt="SAGC" width="360"/>](https://sa-genomics.com.au)
