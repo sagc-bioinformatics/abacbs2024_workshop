@@ -115,4 +115,9 @@ https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/tutorials/run-
 
 # StereoMap
 
+https://en.stomics.tech/products/stomics-software/stomics-offline-software/list.html
+
 # StereoPy
+
+https://stereopy.readthedocs.io/en/latest/content/01_Usage_principles.html
+
