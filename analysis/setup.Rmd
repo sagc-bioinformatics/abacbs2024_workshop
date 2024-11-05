@@ -27,7 +27,7 @@ BIND_PATH=/my/local/storage
 
 docker run \
     --rm -ti \
-    -p 8787:8787 \
+    -p 8080:8080 \
     -p 8888:8888 \
     -v ${BIND_PATH}:/root/data quay.io/sagc/rstomics
 ```
@@ -39,7 +39,7 @@ docker run \
 
 Once the container is running:
 
-- The RStudio server can be accessed on port 8787: [http://127.0.0.1:8787](http://127.0.0.1:8787)
+- The RStudio server can be accessed on port 8080: [http://127.0.0.1:8080](http://127.0.0.1:8080)
 - The JupyterLab server can be accessed on port 8888: [http://127.0.0.1:8888](http://127.0.0.1:8888)
 
 Use passphrase `abacbs24` and username `root` if required.

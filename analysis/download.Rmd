@@ -6,7 +6,7 @@ editor_options:
 
 ```{r, include=FALSE}
 
-options(timeout = 600) # Increase download timeout
+options(timeout = 6000) # Increase download timeout
 
 # Function to download data only if it doesn't exist
 # TODO: should probably checksum existing files
@@ -33,23 +33,23 @@ SAW (Stereo-seq Analysis Workflow) v8.1 was run to generate several output files
 we will explore. The processed data will not be available indefinitely, however
 later you will see how to regenerate it for yourself. (See the [SAW page](SAW.html#processing-data-with-saw))
 
-You can download the [SAW report here](https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&files_ids=23488227).
+You can download the [SAW report here](https://filesender.aarnet.edu.au/download.php?token=bb9f59bb-441d-49bc-a0b5-8a05f6d5a2c0&files_ids=23522487).
 
 
 ```{r}
 # Download report
 
-download_missing(url="https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&files_ids=23488227", destfile="data/C04042E3.report.tar.gz")
+download_missing(url="https://filesender.aarnet.edu.au/download.php?token=bb9f59bb-441d-49bc-a0b5-8a05f6d5a2c0&files_ids=23522487", destfile="data/C04042E3.report.tar.gz")
 ```
 
-A primary output of SAW v8.1 is [visualization.tar.gz](https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&files_ids=23488224). We will be extracting this file and examining the contents.
+A primary output of SAW v8.1 is [visualization.tar.gz](https://filesender.aarnet.edu.au/download.php?token=bb9f59bb-441d-49bc-a0b5-8a05f6d5a2c0&files_ids=23522484). We will be extracting this file and examining the contents.
 
 > **Warning:** Relatively large file (4.9GB)!
 
 ```{r}
 # Download visualization.tar.gz
 
-download_missing(url="https://filesender.aarnet.edu.au/download.php?token=a66ee3d9-c207-4f1d-8ce1-6f7045a6a67b&files_ids=23488224", destfile="data/visualization.tar.gz")
+download_missing(url="https://filesender.aarnet.edu.au/download.php?token=bb9f59bb-441d-49bc-a0b5-8a05f6d5a2c0&files_ids=23522484", destfile="data/visualization.tar.gz")
 ```
 
 ## Mouse liver (published data)

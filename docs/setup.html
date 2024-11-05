@@ -396,7 +396,7 @@ BIND_PATH=/my/local/storage
 
 docker run \
     --rm -ti \
-    -p 8787:8787 \
+    -p 8080:8080 \
     -p 8888:8888 \
     -v ${BIND_PATH}:/root/data quay.io/sagc/rstomics</code></pre>
 <blockquote>
@@ -408,8 +408,8 @@ be visible in the container at /root/data)</p>
 <h3>Accessing the environment</h3>
 <p>Once the container is running:</p>
 <ul>
-<li>The RStudio server can be accessed on port 8787: <a
-href="http://127.0.0.1:8787">http://127.0.0.1:8787</a></li>
+<li>The RStudio server can be accessed on port 8080: <a
+href="http://127.0.0.1:8080">http://127.0.0.1:8080</a></li>
 <li>The JupyterLab server can be accessed on port 8888: <a
 href="http://127.0.0.1:8888">http://127.0.0.1:8888</a></li>
 </ul>

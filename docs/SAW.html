@@ -408,8 +408,8 @@ href="%22https://www.cell.com/cell/fulltext/S0092-8674(22)00399-3%22">paper</a><
 <h1>Processing data with SAW</h1>
 <p>Once your experiment is complete, you will have the following:</p>
 <ul>
-<li>Mask file</li>
-<li>Fastq files</li>
+<li>Mask file (.h5)</li>
+<li>Reads (.fastq)</li>
 </ul>
 <p>You will need to process the data using Stereo-seq Analysis Workflow
 (SAW). This command-line tool provides similar functionality for
@@ -526,7 +526,59 @@ similar to this:</p>
 │   └── C04042E3_HE_tissue_cut.tif
 ├── visualization.tar.gz
 └── visualization.tar.gz.md5</code></pre>
-<p>Let’s discuss what these files contain.</p>
+<p>A detailed guide to these outputs can be found <a
+href="https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/analysis/outputs/count-outputs">in
+the SAW manual</a>.</p>
+</div>
+<div id="html-report" class="section level2">
+<h2>HTML report</h2>
+<p>The first place to look is generally the HTML report. We can extract
+it from the archive and open it in a browser:</p>
+<pre class="r"><code># First extract the archive if needed
+
+if (!file.exists(&#39;data/report/&#39;)) {
+  untar(&#39;data/C04042E3.report.tar.gz&#39;, exdir=&#39;data&#39;)
+}
+
+# Now access it from data/report/report.html</code></pre>
+<p>A more detailed guide to the SAW report can be found <a
+href="https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/analysis/outputs/html-report">in
+the SAW manual</a>.</p>
+</div>
+<div id="gef-files" class="section level2">
+<h2>GEF files</h2>
+<p>These are the main count matrices, in HDF5 format.</p>
+</div>
+<div id="h5ad-files" class="section level2">
+<h2>h5ad files</h2>
+<p>These contain clustering results, for the most part. The default
+method is Leiden clustering.</p>
+</div>
+<div id="visualization.tar.gz" class="section level2">
+<h2>visualization.tar.gz</h2>
+<p>This packages the main outputs into a single file for visualization.
+It is also a handy file for distributing results easily, as it packages
+most of the main outputs (excluding the BAM files).</p>
+<pre class="r"><code># Extracting the visualization archive
+
+if (!file.exists(&#39;data/visualization/&#39;)) {
+  untar(&#39;data/visualization.tar.gz&#39;, exdir=&#39;data&#39;)
+}</code></pre>
+<p>Taking a look inside, we see many of the other output files have been
+repackaged here:</p>
+<pre class="bash"><code>.
+├── C04042E3.adjusted.cellbin.gef
+├── C04042E3.bin20_1.0.h5ad
+├── C04042E3.bin50_1.0.h5ad
+├── C04042E3.cellbin_1.0.adjusted.h5ad
+├── C04042E3.rpi
+├── C04042E3_SC_20240925_142342_4.1.0.tar.gz
+├── C04042E3.stereo
+├── C04042E3.tissue.gef
+└── HE_matrix_template.txt</code></pre>
+<p>A JSON manifest of the experiment can be found in
+<code>.stereo</code>, which allows loading all of the packaged data in a
+single step from StereoMap.</p>
 </div>
 </div>
 <div id="stereomap" class="section level1">

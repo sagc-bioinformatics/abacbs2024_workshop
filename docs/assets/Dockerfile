@@ -64,12 +64,12 @@ ENV PASSWORD="abacbs24"
 RUN echo "root:${PASSWORD}" | chpasswd
 
 # Expose both RStudio and JupyterLab ports
-EXPOSE 8787 8888
+EXPOSE 8080 8888
 
 # Create a startup script
 RUN echo '#!/bin/bash\n\
 jupyter lab --ip 0.0.0.0 --port 8888 --allow-root --no-browser &\n\
-/usr/lib/rstudio-server/bin/rserver --server-daemonize=0 --auth-minimum-user-id=0 \n\
+/usr/lib/rstudio-server/bin/rserver --www-port=8080 --server-daemonize=0 --auth-minimum-user-id=0 \n\
 ' > /usr/local/bin/start-services.sh && \
     chmod +x /usr/local/bin/start-services.sh
 

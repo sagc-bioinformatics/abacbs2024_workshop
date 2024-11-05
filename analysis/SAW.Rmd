@@ -32,8 +32,8 @@ More information on Stereo-seq can be found in the [paper]("https://www.cell.com
 
 Once your experiment is complete, you will have the following:
 
-- Mask file
-- Fastq files
+- Mask file (.h5)
+- Reads (.fastq)
 
 You will need to process the data using Stereo-seq Analysis Workflow (SAW).
 This command-line tool provides similar functionality for Stereo-seq to what
@@ -149,7 +149,66 @@ $ tree outs/
 └── visualization.tar.gz.md5
 ```
 
-Let's discuss what these files contain.
+A detailed guide to these outputs can be found [in the SAW manual](https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/analysis/outputs/count-outputs).
+
+## HTML report
+
+The first place to look is generally the HTML report.
+We can extract it from the archive and open it in a browser:
+
+```{r}
+# First extract the archive if needed
+
+if (!file.exists('data/report/')) {
+  untar('data/C04042E3.report.tar.gz', exdir='data')
+}
+
+# Now access it from data/report/report.html
+```
+
+A more detailed guide to the SAW report can be found [in the SAW manual](https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/analysis/outputs/html-report).
+
+## GEF files
+
+These are the main count matrices, in HDF5 format.
+
+## h5ad files
+
+These contain clustering results, for the most part.
+The default method is Leiden clustering.
+
+## visualization.tar.gz
+
+This packages the main outputs into a single file for visualization.
+It is also a handy file for distributing results easily, as it packages most
+of the main outputs (excluding the BAM files).
+
+
+```{r}
+# Extracting the visualization archive
+
+if (!file.exists('data/visualization/')) {
+  untar('data/visualization.tar.gz', exdir='data')
+}
+```
+
+Taking a look inside, we see many of the other output files have been repackaged here:
+
+```{bash, eval=FALSE}
+.
+├── C04042E3.adjusted.cellbin.gef
+├── C04042E3.bin20_1.0.h5ad
+├── C04042E3.bin50_1.0.h5ad
+├── C04042E3.cellbin_1.0.adjusted.h5ad
+├── C04042E3.rpi
+├── C04042E3_SC_20240925_142342_4.1.0.tar.gz
+├── C04042E3.stereo
+├── C04042E3.tissue.gef
+└── HE_matrix_template.txt
+```
+
+A JSON manifest of the experiment can be found in `.stereo`, which allows loading
+all of the packaged data in a single step from StereoMap.
 
 # StereoMap
 
