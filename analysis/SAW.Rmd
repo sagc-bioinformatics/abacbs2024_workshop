@@ -1,5 +1,5 @@
 ---
-title: "Part 1"
+title: "Workbook"
 site: workflowr::wflow_site
 editor_options:
   chunk_output_type: console
@@ -114,6 +114,8 @@ Notes:
 - `--fastqs` points to a directory containing fastq file pairs. More than one pair can be present (e.g. if multiple sequencing runs or lanes were used) 
 - `--organism` and `--tissue` can be any string
 
+# SAW outputs
+
 Once this is complete, an `outs` directory will be created similar to this:
 
 ```{bash, eval=FALSE}
@@ -226,7 +228,15 @@ StereoMap v4.1 is compatible with SAW v8.1. Previous versions also included
 image QC in a seperate program, ImageStudio, which is now integrated with 
 StereoMap.
 
-# Loading STOmics data into SpatialExperiment
+# StereoPy
+
+StereoPy is a Python library designed to work with Stereo-seq data.
+
+https://stereopy.readthedocs.io/en/latest/content/01_Usage_principles.html
+
+We will use it to investigate our data over on JupyterLab.
+
+# Loading in SpatialExperiment
 
 [SpatialExperiment](https://www.bioconductor.org/packages/release/bioc/vignettes/SpatialExperiment/inst/doc/SpatialExperiment.html) library is an S4 class that
 extends SingleCellExperiment. While there's no way to import directly, we can
@@ -239,7 +249,7 @@ library(rhdf5)
 library(Matrix)
 
 # Load the matrix data (CSR format)
-# matrix_data <- h5read("data/visualization/C04042E3.bin20_1.0.h5ad", "X")
+matrix_data <- h5read("data/visualization/C04042E3.bin20_1.0.h5ad", "X")
 
 # Extract dimensions (this is stored as an attribute)
 shape <- h5readAttributes("data/visualization/C04042E3.bin20_1.0.h5ad", "X")$shape
@@ -287,10 +297,3 @@ colData(spe)$sums <- colSums(counts(spe))
 plotSpots(spe, annotate="sums")
 ```
 
-# StereoPy
-
-StereoPy is a Python library designed to work with Stereo-seq data.
-
-https://stereopy.readthedocs.io/en/latest/content/01_Usage_principles.html
-
-We will use it to investigate our data over on JupyterLab.

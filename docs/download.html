@@ -13,7 +13,7 @@
 
 <title>Data download</title>
 
-<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
@@ -346,10 +346,7 @@ div.tocify {
   <a href="download.html">Download</a>
 </li>
 <li>
-  <a href="SAW.html">Part 1</a>
-</li>
-<li>
-  <a href="downstream.html">Part 2</a>
+  <a href="SAW.html">Workbook</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -427,13 +424,16 @@ LIver Spatio-Temporal Atlas</a>, in which Stereo-seq to profile mouse
 liver homeostasis and regeneration following partial hepatectomy over
 several time points. Our file is from day 0, the first time point
 following hepatectomy.</p>
-<p>TODO: Matched single cell data is also available to download from <a
-href="">here</a></p>
+<p>So that we don’t have to spend time converting it, we’ll load a
+premade RDS file:</p>
+<pre class="r"><code># Download rds file
+
+download_missing(url=&quot;https://filesender.aarnet.edu.au/download.php?token=07174a85-a97c-4f03-a175-2b6a0650d73c&amp;files_ids=23535906&quot;, destfile=&quot;data/DY1_D0.rds&quot;)</code></pre>
 </div>
 <div id="next-steps" class="section level2">
 <h2>Next steps</h2>
-<p>Once the data has downloaded, you’re ready to move on with <a
-href="SAW.html">Part 1</a>!</p>
+<p>Once the data has downloaded, you’re ready to <a href="SAW.html">move
+on</a>!</p>
 </div>
 
 

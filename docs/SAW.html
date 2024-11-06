@@ -11,9 +11,9 @@
 
 
 
-<title>Part 1</title>
+<title>Workbook</title>
 
-<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
@@ -346,10 +346,7 @@ div.tocify {
   <a href="download.html">Download</a>
 </li>
 <li>
-  <a href="SAW.html">Part 1</a>
-</li>
-<li>
-  <a href="downstream.html">Part 2</a>
+  <a href="SAW.html">Workbook</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -369,7 +366,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Part 1</h1>
+<h1 class="title toc-ignore">Workbook</h1>
 
 </div>
 
@@ -494,6 +491,10 @@ runs or lanes were used)</li>
 <li><code>--organism</code> and <code>--tissue</code> can be any
 string</li>
 </ul>
+</div>
+</div>
+<div id="saw-outputs" class="section level1">
+<h1>SAW outputs</h1>
 <p>Once this is complete, an <code>outs</code> directory will be created
 similar to this:</p>
 <pre class="bash"><code>$ tree outs/
@@ -529,7 +530,6 @@ similar to this:</p>
 <p>A detailed guide to these outputs can be found <a
 href="https://stereotoolss-organization.gitbook.io/saw-user-manual-v8.1/analysis/outputs/count-outputs">in
 the SAW manual</a>.</p>
-</div>
 <div id="html-report" class="section level2">
 <h2>HTML report</h2>
 <p>The first place to look is generally the HTML report. We can extract
@@ -579,6 +579,10 @@ repackaged here:</p>
 <p>A JSON manifest of the experiment can be found in
 <code>.stereo</code>, which allows loading all of the packaged data in a
 single step from StereoMap.</p>
+<p>Although these have varied extensions, they’re mostly just hdf5
+format archives.</p>
+<p>The rpi file can be converted to tif files using SAW (although it’s
+easier to just take the output directly from <code>saw count</code>)</p>
 </div>
 </div>
 <div id="stereomap" class="section level1">
@@ -591,9 +595,6 @@ class="uri">https://en.stomics.tech/products/stomics-software/stomics-offline-so
 <p>StereoMap v4.1 is compatible with SAW v8.1. Previous versions also
 included image QC in a seperate program, ImageStudio, which is now
 integrated with StereoMap.</p>
-<div id="todo-demo-basic-tasks" class="section level2">
-<h2>TODO: demo basic tasks</h2>
-</div>
 </div>
 <div id="stereopy" class="section level1">
 <h1>StereoPy</h1>
@@ -604,10 +605,124 @@ href="https://stereopy.readthedocs.io/en/latest/content/01_Usage_principles.html
 class="uri">https://stereopy.readthedocs.io/en/latest/content/01_Usage_principles.html</a></p>
 <p>We will use it to investigate our data over on JupyterLab.</p>
 </div>
-<div id="next-steps" class="section level1">
-<h1>Next steps</h1>
-<p>After the break, we’ll move on with <a href="downstream.html">Part
-2</a>, and see how to do some downstream analysis!</p>
+<div id="loading-in-spatialexperiment" class="section level1">
+<h1>Loading in SpatialExperiment</h1>
+<p><a
+href="https://www.bioconductor.org/packages/release/bioc/vignettes/SpatialExperiment/inst/doc/SpatialExperiment.html">SpatialExperiment</a>
+library is an S4 class that extends SingleCellExperiment. While there’s
+no way to import directly, we can find all the data we need from the
+h5ad files provided from SAW.</p>
+<p>First let’s load the matrix.</p>
+<pre class="r"><code>library(rhdf5)
+library(Matrix)
+
+# Load the matrix data (CSR format)
+matrix_data &lt;- h5read(&quot;data/visualization/C04042E3.bin20_1.0.h5ad&quot;, &quot;X&quot;)
+
+# Extract dimensions (this is stored as an attribute)
+shape &lt;- h5readAttributes(&quot;data/visualization/C04042E3.bin20_1.0.h5ad&quot;, &quot;X&quot;)$shape
+
+# Extract the components
+data &lt;- matrix_data$data        # Non-zero values
+indices &lt;- matrix_data$indices  # Column indices of non-zero values
+indptr &lt;- matrix_data$indptr    # Row pointers for non-zero values
+
+# Reconstruct the CSR matrix (have to add 1 to indices for R)
+csr_matrix &lt;- sparseMatrix(
+  i = as.integer(rep(seq_len(length(indptr)-1), diff(indptr))),  # expand row indices
+  j = as.integer(indices + 1),  # R uses 1-based indexing, so add 1 to column indices
+  x = as.numeric(data),
+  dims = shape,
+)</code></pre>
+<p>We can also add in row and col data.</p>
+<pre class="r"><code>obs &lt;- h5read(&quot;data/visualization/C04042E3.bin20_1.0.h5ad&quot;, &quot;obs&quot;)
+var &lt;- h5read(&quot;data/visualization/C04042E3.bin20_1.0.h5ad&quot;, &quot;var&quot;)
+
+library(S4Vectors)</code></pre>
+<pre><code>Loading required package: stats4</code></pre>
+<pre><code>Loading required package: BiocGenerics</code></pre>
+<pre><code>
+Attaching package: &#39;BiocGenerics&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:stats&#39;:
+
+    IQR, mad, sd, var, xtabs</code></pre>
+<pre><code>The following objects are masked from &#39;package:base&#39;:
+
+    anyDuplicated, aperm, append, as.data.frame, basename, cbind,
+    colnames, dirname, do.call, duplicated, eval, evalq, Filter, Find,
+    get, grep, grepl, intersect, is.unsorted, lapply, Map, mapply,
+    match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,
+    Position, rank, rbind, Reduce, rownames, sapply, saveRDS, setdiff,
+    table, tapply, union, unique, unsplit, which.max, which.min</code></pre>
+<pre><code>
+Attaching package: &#39;S4Vectors&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:Matrix&#39;:
+
+    expand, unname</code></pre>
+<pre><code>The following object is masked from &#39;package:utils&#39;:
+
+    findMatches</code></pre>
+<pre><code>The following objects are masked from &#39;package:base&#39;:
+
+    expand.grid, I, unname</code></pre>
+<pre class="r"><code>library(SpatialExperiment)</code></pre>
+<pre><code>Loading required package: SingleCellExperiment</code></pre>
+<pre><code>Loading required package: SummarizedExperiment</code></pre>
+<pre><code>Loading required package: MatrixGenerics</code></pre>
+<pre><code>Loading required package: matrixStats</code></pre>
+<pre><code>
+Attaching package: &#39;MatrixGenerics&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:matrixStats&#39;:
+
+    colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
+    colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
+    colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
+    colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
+    colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
+    colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
+    colWeightedMeans, colWeightedMedians, colWeightedSds,
+    colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
+    rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
+    rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
+    rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
+    rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
+    rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
+    rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
+    rowWeightedSds, rowWeightedVars</code></pre>
+<pre><code>Loading required package: GenomicRanges</code></pre>
+<pre><code>Loading required package: IRanges</code></pre>
+<pre><code>Loading required package: GenomeInfoDb</code></pre>
+<pre><code>Loading required package: Biobase</code></pre>
+<pre><code>Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    &#39;browseVignettes()&#39;. To cite Bioconductor, see
+    &#39;citation(&quot;Biobase&quot;)&#39;, and for packages &#39;citation(&quot;pkgname&quot;)&#39;.</code></pre>
+<pre><code>
+Attaching package: &#39;Biobase&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:MatrixGenerics&#39;:
+
+    rowMedians</code></pre>
+<pre><code>The following objects are masked from &#39;package:matrixStats&#39;:
+
+    anyMissing, rowMedians</code></pre>
+<pre class="r"><code># create SpatialExperiment object
+spe &lt;- SpatialExperiment(
+  assays = list(counts = t(csr_matrix)), 
+  colData = DataFrame(cluster=as.factor(obs$leiden$codes), in_tissue=TRUE), # get cluster in there 
+  rowData = DataFrame(gene_id=var$`_index`),
+  spatialCoords = data.matrix(DataFrame(x=obs$x, y=obs$y))
+)</code></pre>
+<p>We can now use this as we would any other spot-based experiment.</p>
+<pre class="r"><code>library(ggspavis)</code></pre>
+<pre><code>Loading required package: ggplot2</code></pre>
+<pre><code>Registered S3 method overwritten by &#39;ggside&#39;:
+  method from   
+  +.gg   ggplot2</code></pre>
+<pre class="r"><code># Get norm counts 
+colData(spe)$sums &lt;- colSums(counts(spe))
+plotSpots(spe, annotate=&quot;sums&quot;)</code></pre>
+<p><img src="figure/SAW.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 
 

@@ -22,7 +22,7 @@ To get started, please refer to the [setup](setup.html) page.
 |:------|:--------------------------------------|
 | 9:00  | [Part 1 (Intro and SAW)](SAW.html)    |
 | 10:00 | Morning tea                           |
-| 10:30 | [Part 2 (Downstream)](downstream.html)|
+| 10:30 | [Part 2 (Downstream)](SAW.html)       |
 | 11:30 | End of workshop                       |
 
 
