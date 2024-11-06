@@ -10,10 +10,8 @@ navbar:
     href: setup.html
   - text: Download
     href: download.html
-  - text: Part 1
+  - text: Workbook
     href: SAW.html
-  - text: Part 2
-    href: downstream.html
   right:
   - icon: fab fa-github
     text: Source code

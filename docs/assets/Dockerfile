@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     libcurl4-openssl-dev \
     libssl-dev \
     libxml2-dev \
+    libglpk-dev \
     libfontconfig1-dev \
     libharfbuzz-dev \
     libfribidi-dev \
@@ -41,11 +42,12 @@ RUN pip install --no-cache-dir \
 
 # Install BiocManager and SpatialExperiment
 RUN R -e 'if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")' && \
-    R -e 'BiocManager::install("SpatialExperiment", ask=FALSE)'
+    R -e 'BiocManager::install(c("SpatialExperiment", "ggspavis", "rhdf5"), ask=FALSE)'
 
 # Install other common R packages
 RUN R -e "install.packages(c(\
     'tidyverse', \
+    'Seurat', \
     'devtools', \
     'rmarkdown', \
     'workflowr' \
