@@ -74,8 +74,14 @@ in which Stereo-seq to profile mouse liver homeostasis and  regeneration
 following partial hepatectomy over several time points. Our file is
 from day 0, the first time point following hepatectomy. 
 
-TODO: Matched single cell data is also available to download from [here]()
+So that we don't have to spend time converting it, we'll load a premade RDS file:
+
+```{r}
+# Download rds file
+
+download_missing(url="https://filesender.aarnet.edu.au/download.php?token=07174a85-a97c-4f03-a175-2b6a0650d73c&files_ids=23535906", destfile="data/DY1_D0.rds")
+```
 
 ## Next steps
 
-Once the data has downloaded, you're ready to move on with [Part 1](SAW.html)!
+Once the data has downloaded, you're ready to [move on](SAW.html)!

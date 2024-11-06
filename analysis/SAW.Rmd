@@ -210,6 +210,11 @@ Taking a look inside, we see many of the other output files have been repackaged
 A JSON manifest of the experiment can be found in `.stereo`, which allows loading
 all of the packaged data in a single step from StereoMap.
 
+Although these have varied extensions, they're mostly just hdf5 format archives.
+
+The rpi file can be converted to tif files using SAW (although it's easier 
+to just take the output directly from `saw count`)
+
 # StereoMap
 
 StereoMap is an interactive tool to examine your Stereo-seq data (similar to
@@ -221,7 +226,66 @@ StereoMap v4.1 is compatible with SAW v8.1. Previous versions also included
 image QC in a seperate program, ImageStudio, which is now integrated with 
 StereoMap.
 
-## TODO: demo basic tasks
+# Loading STOmics data into SpatialExperiment
+
+[SpatialExperiment](https://www.bioconductor.org/packages/release/bioc/vignettes/SpatialExperiment/inst/doc/SpatialExperiment.html) library is an S4 class that
+extends SingleCellExperiment. While there's no way to import directly, we can
+find all the data we need from the h5ad files provided from SAW.
+
+First let's load the matrix.
+
+```{r}
+library(rhdf5)
+library(Matrix)
+
+# Load the matrix data (CSR format)
+# matrix_data <- h5read("data/visualization/C04042E3.bin20_1.0.h5ad", "X")
+
+# Extract dimensions (this is stored as an attribute)
+shape <- h5readAttributes("data/visualization/C04042E3.bin20_1.0.h5ad", "X")$shape
+
+# Extract the components
+data <- matrix_data$data        # Non-zero values
+indices <- matrix_data$indices  # Column indices of non-zero values
+indptr <- matrix_data$indptr    # Row pointers for non-zero values
+
+# Reconstruct the CSR matrix (have to add 1 to indices for R)
+csr_matrix <- sparseMatrix(
+  i = as.integer(rep(seq_len(length(indptr)-1), diff(indptr))),  # expand row indices
+  j = as.integer(indices + 1),  # R uses 1-based indexing, so add 1 to column indices
+  x = as.numeric(data),
+  dims = shape,
+)
+```
+
+We can also add in row and col data.
+
+```{r}
+obs <- h5read("data/visualization/C04042E3.bin20_1.0.h5ad", "obs")
+var <- h5read("data/visualization/C04042E3.bin20_1.0.h5ad", "var")
+
+library(S4Vectors)
+library(SpatialExperiment)
+
+# create SpatialExperiment object
+spe <- SpatialExperiment(
+  assays = list(counts = t(csr_matrix)), 
+  colData = DataFrame(cluster=as.factor(obs$leiden$codes), in_tissue=TRUE), # get cluster in there 
+  rowData = DataFrame(gene_id=var$`_index`),
+  spatialCoords = data.matrix(DataFrame(x=obs$x, y=obs$y))
+)
+
+```
+
+We can now use this as we would any other spot-based experiment.
+
+```{r}
+library(ggspavis)
+
+# Get norm counts 
+colData(spe)$sums <- colSums(counts(spe))
+plotSpots(spe, annotate="sums")
+```
 
 # StereoPy
 
@@ -230,8 +294,3 @@ StereoPy is a Python library designed to work with Stereo-seq data.
 https://stereopy.readthedocs.io/en/latest/content/01_Usage_principles.html
 
 We will use it to investigate our data over on JupyterLab.
-
-# Next steps
-
-After the break, we'll move on with [Part 2](downstream.html), and see how to do some downstream analysis!
-
